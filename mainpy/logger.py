@@ -1,5 +1,6 @@
 import logging as lg
 import pathlib as pal
+print(pal.Path(".").parent)
 path = pal.Path(__file__).parent.parent/"logs"/"logs.log"
 path.parent.mkdir(exist_ok=True)
 def logger():
