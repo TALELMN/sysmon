@@ -1,49 +1,84 @@
 # SysMon
 
-SysMon is a lightweight Python system monitoring and cleanup CLI built for day-to-day machine visibility and as a clean portfolio project. It gives a quick system summary, ranks busy processes, generates a simple health report, exports JSON snapshots, and safely cleans removable junk files.
+SysMon is a small Python command-line project for checking basic system health, listing busy processes, exporting reports, and cleaning up simple junk files. I built it to stay approachable and easy to demo while still feeling like a complete portfolio project instead of a one-file script.
 
-## Features
+## What it does
 
-- `summary` prints a concise machine health overview.
-- `processes` shows the top running processes by CPU or memory.
-- `doctor` scores the system and suggests simple actions.
-- `export` writes a JSON report you can keep or showcase.
-- `cleanup` scans or deletes temporary junk files in a target folder.
-- File logging is built in through `logs/logs.log`.
+- Shows a quick system summary with CPU, memory, disk, uptime, network usage, and battery when available
+- Lists the top running processes by CPU or memory usage
+- Generates a simple "doctor" report with a score and plain-English recommendations
+- Exports a JSON report that can be reused for demos or future dashboard ideas
+- Scans for removable junk files and can delete them when needed
+- Writes activity logs to `logs/logs.log`
 
-## Tech Stack
+## Stack
 
 - Python 3.10+
 - `psutil`
-- Standard library modules such as `argparse`, `json`, `logging`, and `pathlib`
+- Standard library modules including `argparse`, `json`, `logging`, and `pathlib`
 
-## Quick Start
+## Setup
 
-```bash
-python -m venv .venv
-.venv\Scripts\activate
+From the project folder:
+
+```powershell
+cd C:\Users\Talel\Desktop\Docs\Sysmon
+C:\Program Files\Python310\python.exe -m pip install -r requirements.txt
+```
+
+If `python` is already available in your terminal, this also works:
+
+```powershell
 pip install -r requirements.txt
-python -m mainpy.main summary
 ```
 
-## Commands
+## How To Use
 
-```bash
-python -m mainpy.main summary
-python -m mainpy.main processes --sort cpu --limit 8
-python -m mainpy.main doctor
-python -m mainpy.main export --output reports/system_report.json
-python -m mainpy.main cleanup --path . --extensions .tmp .bak
-python -m mainpy.main cleanup --path . --extensions .tmp .bak --delete
+This version of the project is meant to be run as a script:
+
+```powershell
+C:\Program Files\Python310\python.exe mainpy\main.py summary
 ```
 
-## Sample Use Cases
+### Main commands
 
-- Create a JSON report before and after a cleanup run.
-- Demo process monitoring on your portfolio or in interviews.
-- Use `doctor` to show how the app turns raw metrics into a simple health score.
+```powershell
+C:\Program Files\Python310\python.exe mainpy\main.py summary
+C:\Program Files\Python310\python.exe mainpy\main.py processes --sort cpu --limit 8
+C:\Program Files\Python310\python.exe mainpy\main.py processes --sort memory --limit 5
+C:\Program Files\Python310\python.exe mainpy\main.py doctor
+C:\Program Files\Python310\python.exe mainpy\main.py doctor --json
+C:\Program Files\Python310\python.exe mainpy\main.py export --output reports\system_report.json
+C:\Program Files\Python310\python.exe mainpy\main.py cleanup --path . --extensions .tmp .bak
+C:\Program Files\Python310\python.exe mainpy\main.py cleanup --path . --extensions .tmp .bak --delete
+```
 
-## Project Structure
+### What each command does
+
+- `summary` prints a quick overview of the current machine state
+- `processes` shows the busiest processes and lets you choose CPU or memory sorting
+- `doctor` gives the machine a simple health score and suggestions
+- `export` saves a JSON snapshot to the `reports` folder
+- `cleanup` scans for junk files first, and only deletes them when `--delete` is included
+
+## Example workflow
+
+```powershell
+C:\Program Files\Python310\python.exe mainpy\main.py summary
+C:\Program Files\Python310\python.exe mainpy\main.py doctor
+C:\Program Files\Python310\python.exe mainpy\main.py processes --sort memory --limit 5
+C:\Program Files\Python310\python.exe mainpy\main.py export --output reports\system_report.json
+```
+
+That gives you a quick snapshot, a basic health assessment, a short process table, and a report file you can keep.
+
+## Testing
+
+```powershell
+C:\Program Files\Python310\python.exe -m unittest discover -s tests -v
+```
+
+## Project Layout
 
 ```text
 Sysmon/
@@ -59,19 +94,10 @@ Sysmon/
 `-- requirements.txt
 ```
 
-## Testing
+## Why this project works well in a portfolio
 
-```bash
-python -m unittest discover -s tests -v
-```
-
-## Portfolio Notes
-
-This project intentionally stays simple in setup while still showing:
-
-- clean CLI design
-- modular Python structure
-- file handling and logging
-- JSON export
-- test coverage for core logic
-- practical use of a third-party systems library
+- It solves a real problem without being overbuilt
+- It shows modular Python code instead of one large script
+- It includes CLI design, logging, file handling, and JSON export
+- It has test coverage for core parts of the app
+- It is easy to explain and demo live
