@@ -1,2 +1,5 @@
-logs/logs.log
+logs/
 mainpy/__pycache__
+tests/__pycache__
+reports/
+.venv/
