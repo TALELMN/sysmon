@@ -1,10 +1,9 @@
-from __future__ import annotations
-
-import unittest
-
+import sys
+from pathlib import Path
+root_path = Path(__file__).resolve().parent.parent
+sys.path.append(str(root_path))
 from mainpy.stats import build_health_report
-
-
+import unittest
 class StatsTests(unittest.TestCase):
     def test_health_report_marks_healthy_system_as_excellent(self) -> None:
         snapshot = {
